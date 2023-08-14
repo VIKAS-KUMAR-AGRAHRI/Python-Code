@@ -1,0 +1,59 @@
+def inversionCount(self, arr, n):
+        # Your Code Here
+        '''
+        #first method ........................
+        c=0
+        for i in range(len(arr)-1):
+            for j in range(i+1,len(arr)):
+                if arr[i]>arr[j]:
+                    c+=1
+        return c
+        #first method end here..............................
+        '''
+       
+        
+        low = 0
+        high = n-1
+        def count_merge(a,low,mid,high):
+            left = a[low:mid+1]
+            right = a[mid+1:high+1]
+            #print(left,right)
+            m = len(left)
+            n = len(right)
+            i = 0
+            j = 0
+            k= low
+            count = 0
+            while i<m and j<n:
+                if left[i]<= right[j]:
+                    a[k]=left[i]
+                    i=i+1
+                    k=k+1
+                else:
+                    a[k]=right[j]
+                    j=j+1
+                    k=k+1
+                    count=count+(len(left)-i)
+        
+            while i<m:
+                a[k]=left[i]
+                i=i+1
+                k=k+1
+            while j<n:
+                a[k]=right[j]
+                j=j+1
+                k=k+1
+            return count
+        
+        
+        
+        def count_inv(a,low,high):
+            res = 0
+            if low<high:
+                mid = (low+high)//2
+                res = res + count_inv(a,low,mid)
+                res = res + count_inv(a,mid+1,high)
+                res = res + count_merge(a,low,mid,high)
+            return res
+        c = count_inv(arr,low,high)
+        return c
