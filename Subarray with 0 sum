@@ -1,0 +1,18 @@
+#First we calculate sum , and check if is equal to zero then return True otherwise add in set. If next time calculating sum and equal zero or already present sum in the set then also return
+zero, otherwise check new element until array will not exhaust.
+def subArrayExists(self,arr,n):
+        ##Your code here
+        #Return true or false
+        sums=0
+        s=set()
+        for i in range(n):
+            sums+=arr[i]
+            if sums==0 or sums in s:
+                return True
+            s.add(sums)
+        return False
+#Input.....................................
+4,2,-3,1,6
+#output....................
+subarray present ...........
+
