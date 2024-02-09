@@ -1,0 +1,26 @@
+#Concept....................................
+def longestCommonPrefix(arr, n):
+        # find the smallest string list in for knowing the length of string
+        mins=len(min(arr))
+        #and now find the which is smallest string in list
+        minstr=min(arr)
+        #first we slice all the string of list......... in respect smallest string..
+        for i in range(n):
+            arr[i]=(arr[i])[:mins]
+        strs=''
+        #Now check all the character from the smallest string respect
+        for i in range(mins):
+            c=0
+            for j in range(n):
+                if minstr[i]==arr[j][i]:
+                    #count the string matching , if c is not equal to length of list , then that string character or not matched and we stop the checking of next character of minstr.
+                    c+=1
+                
+            if c==n:
+                strs+=minstr[i]
+            else:
+                break
+        return strs if len(strs)>0 else -1
+#Take the input for the execution.............................
+val=[geeksforgeeks, geeks, geek,geezer]
+print("substring of prefix",longest(val,len(val))
