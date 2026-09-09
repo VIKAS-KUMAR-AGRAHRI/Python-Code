@@ -1,0 +1,27 @@
+Problem: Given an array arr[], determine if it can be partitioned into two subsets such that the sum of elements in both parts is the same.
+
+Note: Each element must be in exactly one subset.   
+
+
+#Approach: 
+#* As we know the , we need to divide array in two equal sum part, so total sum of array should be even number, because odd number can't divide in two part.
+#* we use knapsack 0/1 approach , need to add array arr[i] value in sum1 or sum2 means take or leave that value.
+#* if we reach at length of array , then we have to check whether sum1==sum2, meanse subset1 sum equal to subset2 sum
+#* also used dp as if given index , sum1 and sum2 value already calculated , we don't need to calculate again
+
+class Solution:
+    def equalPartition(self, arr):
+        if sum(arr)%2!=0 or len(arr)==1:
+            return False
+        dp={}
+        return self.myfun(arr,0,0,0,dp)
+    def myfun(self,arr,sum1,sum2,ind,dp):
+        #we will go from 0 to n
+        if ind==len(arr):
+            return sum1==sum2
+        if (ind,sum1,sum2) in dp:
+            return dp[(ind,sum1,sum2)]
+        take = self.myfun(arr,sum1+arr[ind],sum2,ind+1,dp)
+        leave= self.myfun(arr,sum1,sum2+arr[ind],ind+1,dp)
+        dp[(ind,sum1,sum2)]= take or leave
+        return dp[(ind,sum1,sum2)]
